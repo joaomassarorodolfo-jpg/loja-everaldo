@@ -1,255 +1,115 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Futura Studio | Experiência de Compra</title>
-    <!-- Fontes Premium e Ícones -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cloudflare.com">
+    <title>Loja de Personalizados - Sublimação & Brindes</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="top-glow"></div>
-
-    <div class="app-layout">
-        
-        <!-- Painel Lateral de Navegação -->
-        <aside class="sidebar">
-            <div class="brand">
-                <div class="brand-icon">F</div>
-                <h2>Futura<span>Studio</span></h2>
-            </div>
-
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="search-input" placeholder="Buscar produto..." oninput="filtrarProdutos()">
-            </div>
-
-            <div class="filter-section">
-                <h3>Categorias</h3>
-                <ul class="filter-menu" id="categorias-menu"></ul>
-            </div>
-
-            <div class="sidebar-footer">
-                <p>⚡ Catálogo 100% Personalizável</p>
-            </div>
-        </aside>
-
-        <!-- Área Principal -->
-        <main class="main-content">
-            
-            <header class="topbar">
-                <div class="welcome-text">
-                    <h1>Área de Criação</h1>
-                    <p>Configure os detalhes do seu produto abaixo antes de adicionar à sacola.</p>
-                </div>
-                
-                <div class="cart-trigger" onclick="toggleCarrinho()">
-                    <div class="cart-icon-wrapper">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        <span id="cart-count" class="badge">0</span>
-                    </div>
-                    <div class="cart-trigger-info">
-                        <span>Sacola</span>
-                        <b id="cart-total-trigger">R$ 0,00</b>
-                    </div>
-                </div>
-            </header>
-
-            <!-- Vitrine com inputs de personalização -->
-            <section class="gallery-section">
-                <div class="grid-gallery" id="produtos-vitrine"></div>
-            </section>
-        </main>
-    </div>
-
-    <!-- Sacola Lateral -->
-    <div id="carrinho-lateral" class="glass-cart">
-        <div class="cart-inner">
-            <div class="cart-header">
-                <h2>Seu Pedido</h2>
-                <button class="close-cart" onclick="toggleCarrinho()"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            
-            <div class="cart-body" id="carrinho-itens-lista">
-                <div class="empty-state">
-                    <i class="fa-solid fa-box-open"></i>
-                    <p>Sua sacola está vazia.</p>
-                    <span>Escolha e personalize um item primeiro.</span>
-                </div>
-            </div>
-
-            <div class="cart-footer">
-                <div class="summary-line">
-                    <span>Subtotal</span>
-                    <span id="carrinho-total">R$ 0,00</span>
-                </div>
-                <div class="summary-line total">
-                    <span>Total estimado</span>
-                    <span id="carrinho-total-final">R$ 0,00</span>
-                </div>
-                <button class="btn-checkout" onclick="enviarPedidoWhatsApp()">
-                    <span>Enviar Detalhes via WhatsApp</span>
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
+    <!-- Cabeçalho com Menu -->
+    <header>
+        <div class="container navbar">
+            <div class="logo">🎨 Arte<span>Viva</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Início</a></li>
+                    <li><a href="#produtos">Produtos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
         </div>
-    </div>
-    <div id="overlay" class="blur-overlay" onclick="toggleCarrinho()"></div>
+    </header>
 
-    <!-- Banco de Dados e Lógica Avançada -->
-    <script>
-        const produtos = [
-            { 
-                id: 1, 
-                nome: "Caneca Neo-Cerâmica", 
-                preco: 35.00, 
-                
-                // 📍 COLOQUE SUA IMAGEM AQUI (Caneca):
-                img: "imagens/caneca.jpg", 
-                
-                cat: "Canecas", 
-                desc: "Acabamento fosco de alta qualidade.",
-                opcoes: ["Porcelana Branca", "Interior Colorido", "Mágica Preta"]
-            },
-            { 
-                id: 2, 
-                nome: "Camiseta Minimalist Heavyweight", 
-                preco: 49.90, 
-                
-                // 📍 COLOQUE SUA IMAGEM AQUI (Camiseta):
-                img: "imagens/camiseta.jpg", 
-                
-                cat: "Camisetas", 
-                desc: "Algodão premium 100% penteado.",
-                opcoes: ["Tamanho P", "Tamanho M", "Tamanho G", "Tamanho GG"]
-            },
-            { 
-                id: 3, 
-                nome: "Chaveiro Polímero Esculpido", 
-                preco: 12.00, 
-                
-                // 📍 COLOQUE SUA IMAGEM AQUI (Chaveiro):
-                img: "imagens/chaveiro.jpg", 
-                
-                cat: "Chaveiros", 
-                desc: "Corte preciso a laser.",
-                opcoes: ["Formato Redondo", "Formato Quadrado", "Formato Coração"]
-            },
-            { 
-                id: 4, 
-                nome: "Quadro em Azulejo Vitrificado", 
-                preco: 40.00, 
-                
-                // 📍 COLOQUE SUA IMAGEM AQUI (Quadro Azulejo):
-                img: "imagens/azulejo.jpg", 
-                
-                cat: "Quadros", 
-                desc: "Brilho espelhado com suporte incluso.",
-                opcoes: ["Tamanho 15x15 cm", "Tamanho 20x20 cm"]
-            },
-            { 
-                id: 5, 
-                nome: "Quadro MDF Minimalista", 
-                preco: 25.00, 
-                
-                // 📍 COLOQUE SUA IMAGEM AQUI (Quadro MDF):
-                img: "imagens/mdf.jpg", 
-                
-                cat: "Quadros", 
-                desc: "Acompanha fita dupla face de alta fixação.",
-                opcoes: ["A4 (20x30 cm)", "A3 (30x40 cm)"]
-            },
-            { 
-                id: 6, 
-                nome: "Squeeze Alumínio Escovado", 
-                preco: 39.90, 
-                
-                // 📍 COLOQUE SUA IMAGEM AQUI (Squeeze):
-                img: "imagens/squeeze.jpg", 
-                
-                cat: "Squeezes", 
-                desc: "Tampa com vedação hermética anti-vazamento.",
-                opcoes: ["Prata Escovado", "Branco Resinado"]
-            }
-        ];
+    <!-- Banner de Destaque -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Produtos Personalizados do Seu Jeito</h2>
+            <p>Os melhores presentes e brindes para eternizar momentos especiais.</p>
+            <a href="#produtos" class="btn">Ver Catálogo</a>
+        </div>
+    </section>
 
-        let carrinho = [];
-        let categoriaAtiva = "Todos";
-
-        function init() {
-            renderCategorias();
-            renderProdutos();
-        }
-
-        function renderCategorias() {
-            const menu = document.getElementById('categorias-menu');
-            const categoriasUnicas = ["Todos", ...new Set(produtos.map(p => p.cat))];
-            menu.innerHTML = categoriasUnicas.map(cat => `
-                <li class="${cat === categoriaAtiva ? 'active' : ''}" onclick="setCategoria('${cat}')">
-                    <i class="fa-solid fa-chevron-right"></i> ${cat}
-                </li>
-            `).join('');
-        }
-
-        function setCategoria(cat) {
-            categoriaAtiva = cat;
-            renderCategorias();
-            renderProdutos();
-        }
-
-        function filtrarProdutos() {
-            renderProdutos();
-        }
-
-        function renderProdutos() {
-            const vitrine = document.getElementById('produtos-vitrine');
-            const termoBusca = document.getElementById('search-input').value.toLowerCase();
-
-            const produtosFiltrados = produtos.filter(p => {
-                const matchesCat = (categoriaAtiva === "Todos" || p.cat === categoriaAtiva);
-                const matchesBusca = p.nome.toLowerCase().includes(termoBusca) || p.desc.toLowerCase().includes(termoBusca);
-                return matchesCat && matchesBusca;
-            });
-
-            if (produtosFiltrados.length === 0) {
-                vitrine.innerHTML = `<div class="no-results">Nenhum produto encontrado.</div>`;
-                return;
-            }
-
-            vitrine.innerHTML = produtosFiltrados.map(p => `
-                <div class="glass-card-product">
-                    <div class="image-wrapper">
-                        <img src="${p.img}" alt="${p.nome}" onerror="this.src='https://placeholder.com'">
-                        <div class="product-badge">${p.cat}</div>
-                    </div>
-                    <div class="content">
-                        <h3>${p.nome}</h3>
-                        <p>${p.desc}</p>
-                        <div class="atendimento-campos">
-                            <select id="opcao-${p.id}" class="custom-select">
-                                ${p.opcoes.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
-                            </select>
-                            <input type="text" id="texto-${p.id}" class="custom-input" placeholder="Nome ou frase para estampar...">
-                        </div>
-                        <div class="footer-row">
-                            <span class="price">R$ ${p.preco.toFixed(2).replace('.', ',')}</span>
-                            <button class="add-to-cart-btn" onclick="capturarEAdicionar(${p.id})">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
+    <!-- Seção de Produtos -->
+    <main class="container" id="produtos">
+        <h3 class="section-title">Nosso Catálogo</h3>
+        
+        <div class="grid-produtos">
+            
+            <!-- Canecas -->
+            <div class="card">
+                <div class="img-placeholder">☕</div>
+                <div class="card-body">
+                    <h4>Caneca Personalizada</h4>
+                    <p>Porcelana premium com estampas brilhantes em alta definição.</p>
+                    <span class="preco">R$ 35,00</span>
+                    <button class="btn-comprar">Comprar Agora</button>
                 </div>
-            `).join('');
-        }
+            </div>
 
-        function toggleCarrinho() {
-            document.getElementById('carrinho-lateral').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
-        }
+            <!-- Camisetas -->
+            <div class="card">
+                <div class="img-placeholder">👕</div>
+                <div class="card-body">
+                    <h4>Camiseta Estampada</h4>
+                    <p>Tecido confortável com estampas duráveis e personalizadas.</p>
+                    <span class="preco">R$ 59,90</span>
+                    <button class="btn-comprar">Comprar Agora</button>
+                </div>
+            </div>
 
+            <!-- Chaveiros -->
+            <div class="card">
+                <div class="img-placeholder">🔑</div>
+                <div class="card-body">
+                    <h4>Chaveiro Customizado</h4>
+                    <p>Opções resinadas ou em metal para levar para qualquer lugar.</p>
+                    <span class="preco">R$ 15,00</span>
+                    <button class="btn-comprar">Comprar Agora</button>
+                </div>
+            </div>
+
+            <!-- Quadro em Azulejo -->
+            <div class="card">
+                <div class="img-placeholder">🧱</div>
+                <div class="card-body">
+                    <h4>Quadro em Azulejo</h4>
+                    <p>Azulejo de alto brilho com suporte, ideal para fotos marcantes.</p>
+                    <span class="preco">R$ 45,00</span>
+                    <button class="btn-comprar">Comprar Agora</button>
+                </div>
+            </div>
+
+            <!-- Quadro em MDF -->
+            <div class="card">
+                <div class="img-placeholder">🖼️</div>
+                <div class="card-body">
+                    <h4>Quadro em MDF</h4>
+                    <p>Placa decorativa em madeira MDF com fita dupla face inclusa.</p>
+                    <span class="preco">R$ 25,00</span>
+                    <button class="btn-comprar">Comprar Agora</button>
+                </div>
+            </div>
+
+            <!-- Squeeze -->
+            <div class="card">
+                <div class="img-placeholder">🧪</div>
+                <div class="card-body">
+                    <h4>Squeeze de Alumínio</h4>
+                    <p>Garrafa térmica ou simples para te acompanhar no treino e trabalho.</p>
+                    <span class="preco">R$ 40,00</span>
+                    <button class="btn-comprar">Comprar Agora</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 ArteViva Personalizados. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
