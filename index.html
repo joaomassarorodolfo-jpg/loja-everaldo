@@ -3,60 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Lojinha de Personalizados</title>
-    <!-- Link que conecta o HTML com o arquivo de estilo CSS -->
-    <link rel="stylesheet" href="style.css">
+    <title>Minha Lojinha</title>
+    
+    <!-- ESTILO DA PÁGINA (CSS) -->
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; text-align: center; }
+        header { margin-bottom: 30px; }
+        h1 { color: #ff5722; }
+        
+        /* Organiza as caixas dos produtos uma ao lado da outra */
+        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        
+        /* Estilo da caixinha de cada produto */
+        .card { background: white; border-radius: 10px; padding: 15px; width: 250px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        
+        /* Estilo da foto do produto */
+        .product-img { width: 100%; height: 200px; object-fit: cover; border-radius: 6px; }
+        
+        .price { color: #2e7d32; font-weight: bold; font-size: 18px; margin: 10px 0; }
+        
+        /* Botão verde do WhatsApp */
+        button { background-color: #25d366; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; font-size: 15px; }
+        button:hover { background-color: #1ebe5d; }
+    </style>
 </head>
 <body>
 
     <header>
         <h1>🎨 Loja de Personalizados</h1>
-        <p>Escolha seu produto e finalize o pedido direto pelo WhatsApp!</p>
+        <p>Escolha seu produto e clique para pedir no WhatsApp!</p>
     </header>
 
-    <div class="container" id="product-list">
-        <!-- Os produtos vão aparecer aqui de forma automática através do JavaScript -->
+    <!-- VITRINE DE PRODUTOS -->
+    <div class="container">
+
+        <!-- PRODUTO 1: CANECA -->
+        <div class="card">
+            <!-- 📸 COLOQUE O LINK DA FOTO DA CANECA ENTRE AS ASPAS ABAIXO -->
+            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DA_CANECA_AQUI" alt="Caneca">
+            <h3>Caneca Personalizada</h3>
+            <div class="price">R$ 35,00</div>
+            <button onclick="comprar('Caneca Personalizada')">Comprar no WhatsApp</button>
+        </div>
+
+        <!-- PRODUTO 2: CAMISETA -->
+        <div class="card">
+            <!-- 📸 COLOQUE O LINK DA FOTO DA CAMISETA ENTRE AS ASPAS ABAIXO -->
+            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DA_CAMISETA_AQUI" alt="Camiseta">
+            <h3>Camiseta Personalizada</h3>
+            <div class="price">R$ 50,00</div>
+            <button onclick="comprar('Camiseta Personalizada')">Comprar no WhatsApp</button>
+        </div>
+
+        <!-- PRODUTO 3: CHAVEIRO -->
+        <div class="card">
+            <!-- 📸 COLOQUE O LINK DA FOTO DO CHAVEIRO ENTRE AS ASPAS ABAIXO -->
+            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DO_CHAVEIRO_AQUI" alt="Chaveiro">
+            <h3>Chaveiro</h3>
+            <div class="price">R$ 15,00</div>
+            <button onclick="comprar('Chaveiro')">Comprar no WhatsApp</button>
+        </div>
+
+        <!-- PRODUTO 4: QUADRO AZULEJO -->
+        <div class="card">
+            <!-- 📸 COLOQUE O LINK DA FOTO DO AZULEJO ENTRE AS ASPAS ABAIXO -->
+            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DO_AZULEJO_AQUI" alt="Quadro Azulejo">
+            <h3>Quadro em Azulejo</h3>
+            <div class="price">R$ 45,00</div>
+            <button onclick="comprar('Quadro em Azulejo')">Comprar no WhatsApp</button>
+        </div>
+
+        <!-- PRODUTO 5: QUADRO MDF -->
+        <div class="card">
+            <!-- 📸 COLOQUE O LINK DA FOTO DO MDF ENTRE AS ASPAS ABAIXO -->
+            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DO_QUADRO_MDF_AQUI" alt="Quadro MDF">
+            <h3>Quadro MDF</h3>
+            <div class="price">R$ 40,00</div>
+            <button onclick="comprar('Quadro MDF')">Comprar no WhatsApp</button>
+        </div>
+
+        <!-- PRODUTO 6: SQUEEZE -->
+        <div class="card">
+            <!-- 📸 COLOQUE O LINK DA FOTO DO SQUEEZE ENTRE AS ASPAS ABAIXO -->
+            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DO_SQUEEZE_AQUI" alt="Squeeze">
+            <h3>Squeeze (Garrafinha)</h3>
+            <div class="price">R$ 40,00</div>
+            <button onclick="comprar('Squeeze (Garrafinha)')">Comprar no WhatsApp</button>
+        </div>
+
+        <!-- PRODUTO 7: CHINELO -->
+        <div class="card">
+            <!-- 📸 COLOQUE O LINK DA FOTO DO CHINELO ENTRE AS ASPAS ABAIXO -->
+            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DO_CHINELO_AQUI" alt="Chinelo">
+            <h3>Chinelo Personalizado</h3>
+            <div class="price">R$ 35,00</div>
+            <button onclick="comprar('Chinelo Personalizado')">Comprar no WhatsApp</button>
+        </div>
+
+        <!-- PRODUTO 8: ALMOFADA -->
+        <div class="card">
+            <!-- 📸 COLOQUE O LINK DA FOTO DA ALMOFADA ENTRE AS ASPAS ABAIXO -->
+            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DA_ALMOFADA_AQUI" alt="Almofada">
+            <h3>Almofada</h3>
+            <div class="price">R$ 45,00</div>
+            <button onclick="comprar('Almofada')">Comprar no WhatsApp</button>
+        </div>
+
     </div>
 
+    <!-- SCRIPT QUE FAZ O BOTÃO FUNCIONAR -->
     <script>
-        // 🚨 MUDE AQUI: Coloque seu número do WhatsApp (DDI + DDD + Número)
+        // 🚨 MUDE AQUI: Coloque o seu número do WhatsApp completo (Apenas números)
         const meuNumeroWhatsApp = "5541999999999"; 
 
-        // Lista de produtos. Para mudar a foto, altere o "imagem: '...'"
-        const produtos = [
-            { id: 1, nome: "Caneca Personalizada", preco: 35.00, imagem: "caneca.jpg" },
-            { id: 2, nome: "Camiseta Personalizada", preco: 50.00, imagem: "camiseta.jpg" },
-            { id: 3, nome: "Chaveiro", preco: 15.00, imagem: "chaveiro.jpg" },
-            { id: 4, nome: "Quadro em Azulejo", preco: 45.00, imagem: "azulejo.jpg" },
-            { id: 5, nome: "Quadro MDF", preco: 40.00, imagem: "quadro_mdf.jpg" },
-            { id: 6, nome: "Squeeze (Garrafinha)", preco: 40.00, imagem: "squeeze.jpg" },
-            { id: 7, nome: "Chinelo Personalizado", preco: 35.00, imagem: "chinelo.jpg" },
-            { id: 8, nome: "Almofada", preco: 45.00, imagem: "almofada.jpg" }
-        ];
-
-        const container = document.getElementById("product-list");
-
-        // Cria o visual de cada produto na tela
-        produtos.forEach(produto => {
-            const card = document.createElement("div");
-            card.classList.add("card");
-            card.innerHTML = `
-                <img src="${produto.imagem}" alt="${produto.nome}" class="product-img" onerror="this.src='https://placeholder.com'">
-                <h3>${produto.nome}</h3>
-                <div class="price">R$ ${produto.preco.toFixed(2)}</div>
-                <div class="input-group">
-                    <label for="qtd-${produto.id}">Qtd:</label>
-                    <input type="number" id="qtd-${produto.id}" value="1" min="1">
-                </div>
-                <button onclick="comprar(${produto.id}, '${produto.nome}')">Comprar no WhatsApp</button>
-            `;
-            container.appendChild(card);
-        });
-
-        // Função que envia o cliente para o WhatsApp
-        function comprar(id, nomeProduto) {
-            const quantidade = document.getElementById(`qtd-${id}`).value;
-            const mensagem = `Olá! Gostaria de comprar *${quantidade}x ${nomeProduto}*.`;
+        function comprar(nomeProduto) {
+            const mensagem = `Olá! Gostaria de encomendar: ${nomeProduto}`;
             const url = `https://whatsapp.com{meuNumeroWhatsApp}&text=${encodeURIComponent(mensagem)}`;
             window.open(url, '_blank');
         }
