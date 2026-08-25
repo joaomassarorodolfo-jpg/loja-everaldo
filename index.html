@@ -1,1 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Loja de Personalizados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Topo da Loja -->
+    <header>
+        <h1>🛍️ Loja de Personalizados</h1>
+        <p>Escolha seus produtos e finalize o pedido pelo WhatsApp!</p>
+    </header>
+
+    <!-- Grade de Produtos -->
+    <main class="produtos-container">
+        
+        <!-- Canecas -->
+        <div class="produto-card">
+            <img src="https://placeholder.com" alt="Caneca Personalizada">
+            <h3>Caneca Personalizada</h3>
+            <p class="preco">R$ 35,00</p>
+            <button onclick="comprar('Caneca Personalizada')">Comprar via WhatsApp</button>
+        </div>
+
+        <!-- Camisetas -->
+        <div class="produto-card">
+            <img src="https://placeholder.com" alt="Camiseta Personalizada">
+            <h3>Camiseta Estampada</h3>
+            <p class="preco">R$ 49,90</p>
+            <button onclick="comprar('Camiseta Estampada')">Comprar via WhatsApp</button>
+        </div>
+
+        <!-- Chaveiros -->
+        <div class="produto-card">
+            <img src="https://placeholder.com" alt="Chaveiro">
+            <h3>Chaveiro Personalizado</h3>
+            <p class="preco">R$ 12,00</p>
+            <button onclick="comprar('Chaveiro Personalizado')">Comprar via WhatsApp</button>
+        </div>
+
+        <!-- Quadro em Azulejo -->
+        <div class="produto-card">
+            <img src="https://placeholder.com" alt="Quadro Azulejo">
+            <h3>Quadro em Azulejo</h3>
+            <p class="preco">R$ 40,00</p>
+            <button onclick="comprar('Quadro em Azulejo')">Comprar via WhatsApp</button>
+        </div>
+
+        <!-- Quadro em MDF -->
+        <div class="produto-card">
+            <img src="https://placeholder.com" alt="Quadro MDF">
+            <h3>Quadro em MDF</h3>
+            <p class="preco">R$ 25,00</p>
+            <button onclick="comprar('Quadro em MDF')">Comprar via WhatsApp</button>
+        </div>
+
+        <!-- Squeeze -->
+        <div class="produto-card">
+            <img src="https://placeholder.com" alt="Squeeze">
+            <h3>Squeeze (Garrafa)</h3>
+            <p class="preco">R$ 39,90</p>
+            <button onclick="comprar('Squeeze (Garrafa)')">Comprar via WhatsApp</button>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Minha Loja Virtual. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Lógica de Envio para o WhatsApp -->
+    <script>
+        function comprar(nomeProduto) {
+            // Substitua pelo SEU número de WhatsApp (DDD + Número) sem espaços ou traços
+            const numeroTelefone = "5511999999999"; 
+            
+            // Mensagem automática que chegará no seu WhatsApp
+            const mensagem = `Olá! Gostaria de encomendar o seguinte produto: ${nomeProduto}`;
+            
+            // Cria o link do WhatsApp
+            const url = `https://whatsapp.com{numeroTelefone}&text=${encodeURIComponent(mensagem)}`;
+            
+            // Abre o link em uma nova aba
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
 
