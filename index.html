@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,13 +14,11 @@
 </head>
 <body>
 
-    <!-- Linha de Efeito de Luz Superior -->
     <div class="top-glow"></div>
 
-    <!-- Interface Principal -->
     <div class="app-layout">
         
-        <!-- Painel Lateral de Navegação e Filtros (Fixo) -->
+        <!-- Painel Lateral de Navegação -->
         <aside class="sidebar">
             <div class="brand">
                 <div class="brand-icon">F</div>
@@ -28,32 +27,28 @@
 
             <div class="search-box">
                 <i class="fas fa-search"></i>
-                <input type="text" id="search-input" placeholder="Buscar produto do futuro..." oninput="filtrarProdutos()">
+                <input type="text" id="search-input" placeholder="Buscar produto..." oninput="filtrarProdutos()">
             </div>
 
             <div class="filter-section">
                 <h3>Categorias</h3>
-                <ul class="filter-menu" id="categorias-menu">
-                    <!-- Gerado por JS para escala futura -->
-                </ul>
+                <ul class="filter-menu" id="categorias-menu"></ul>
             </div>
 
             <div class="sidebar-footer">
-                <p>⚡ Powered by GitHub Pages</p>
+                <p>⚡ Catálogo 100% Personalizável</p>
             </div>
         </aside>
 
-        <!-- Área Principal de Conteúdo -->
+        <!-- Área Principal -->
         <main class="main-content">
             
-            <!-- Barra Superior Dinâmica -->
             <header class="topbar">
                 <div class="welcome-text">
-                    <h1>Coleção Exclusiva</h1>
-                    <p>Produtos premium customizados sob demanda.</p>
+                    <h1>Área de Criação</h1>
+                    <p>Configure os detalhes do seu produto abaixo antes de adicionar à sacola.</p>
                 </div>
                 
-                <!-- Botão Flutuante do Carrinho de Alta Tecnologia -->
                 <div class="cart-trigger" onclick="toggleCarrinho()">
                     <div class="cart-icon-wrapper">
                         <i class="fa-solid fa-bag-shopping"></i>
@@ -66,16 +61,14 @@
                 </div>
             </header>
 
-            <!-- Vitrine Infinita -->
+            <!-- Vitrine com inputs de personalização -->
             <section class="gallery-section">
-                <div class="grid-gallery" id="produtos-vitrine">
-                    <!-- Cards de Produtos Gerados Dinamicamente -->
-                </div>
+                <div class="grid-gallery" id="produtos-vitrine"></div>
             </section>
         </main>
     </div>
 
-    <!-- Gaveta do Carrinho Cinemática -->
+    <!-- Sacola Lateral -->
     <div id="carrinho-lateral" class="glass-cart">
         <div class="cart-inner">
             <div class="cart-header">
@@ -84,11 +77,10 @@
             </div>
             
             <div class="cart-body" id="carrinho-itens-lista">
-                <!-- Estado vazio inicial -->
                 <div class="empty-state">
                     <i class="fa-solid fa-box-open"></i>
                     <p>Sua sacola está vazia.</p>
-                    <span>Adicione itens para iniciar.</span>
+                    <span>Escolha e personalize um item primeiro.</span>
                 </div>
             </div>
 
@@ -102,7 +94,7 @@
                     <span id="carrinho-total-final">R$ 0,00</span>
                 </div>
                 <button class="btn-checkout" onclick="enviarPedidoWhatsApp()">
-                    <span>Enviar para produção via WhatsApp</span>
+                    <span>Enviar Detalhes via WhatsApp</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
@@ -110,32 +102,82 @@
     </div>
     <div id="overlay" class="blur-overlay" onclick="toggleCarrinho()"></div>
 
-    <!-- Banco de Dados e Motor da Loja -->
+    <!-- Banco de Dados e Lógica Avançada -->
     <script>
-        // BANCO DE DADOS EM JAVASCRIPT: Para o futuro, basta adicionar novos objetos aqui dentro!
+        /* 
+           📂 GUIA DE IMAGENS PARA O SEU COMPUTADOR:
+           Crie uma pasta chamada 'imagens' junto com o seu index.html.
+           Coloque suas fotos lá dentro com estes nomes exatos:
+           - caneca.jpg, camiseta.jpg, chaveiro.jpg, azulejo.jpg, mdf.jpg, squeeze.jpg
+        */
         const produtos = [
-            { id: 1, nome: "Caneca Neo-Cerâmica", preco: 35.00, img: "https://unsplash.com", cat: "Canecas", desc: "Acabamento fosco, ergonomia perfeita para o dia a dia." },
-            { id: 2, nome: "Camiseta Minimalist Heavyweight", preco: 49.90, img: "https://unsplash.com", cat: "Camisetas", desc: "Algodão premium 100%, caimento streetwear despojado." },
-            { id: 3, nome: "Chaveiro Polímero Esculpido", preco: 12.00, img: "https://unsplash.com", cat: "Chaveiros", desc: "Corte cirúrgico a laser com argola reforçada em titânio." },
-            { id: 4, nome: "Quadro em Azulejo Vitrificado", preco: 40.00, img: "https://unsplash.com", cat: "Quadros", desc: "Brilho espelhado de alta durabilidade com suporte premium." },
-            { id: 5, nome: "Quadro MDF Minimalista", preco: 25.00, img: "https://unsplash.com", cat: "Quadros", desc: "Madeira ecológica texturizada pronta para fixação sem furos." },
-            { id: 6, nome: "Squeeze Alumínio Escovado", preco: 39.90, img: "https://unsplash.com", cat: "Squeezes", desc: "Isolamento térmico leve, tampa com vedação a vácuo." }
+            { 
+                id: 1, 
+                nome: "Caneca Neo-Cerâmica", 
+                preco: 35.00, 
+                img: "imagens/caneca.jpg", 
+                cat: "Canecas", 
+                desc: "Acabamento fosco de alta qualidade.",
+                opcoes: ["Porcelana Branca", "Interior Colorido", "Mágica Preta"]
+            },
+            { 
+                id: 2, 
+                nome: "Camiseta Minimalist Heavyweight", 
+                preco: 49.90, 
+                img: "imagens/camiseta.jpg", 
+                cat: "Camisetas", 
+                desc: "Algodão premium 100% penteado.",
+                opcoes: ["Tamanho P", "Tamanho M", "Tamanho G", "Tamanho GG"]
+            },
+            { 
+                id: 3, 
+                nome: "Chaveiro Polímero Esculpido", 
+                preco: 12.00, 
+                img: "imagens/chaveiro.jpg", 
+                cat: "Chaveiros", 
+                desc: "Corte preciso a laser.",
+                opcoes: ["Formato Redondo", "Formato Quadrado", "Formato Coração"]
+            },
+            { 
+                id: 4, 
+                nome: "Quadro em Azulejo Vitrificado", 
+                preco: 40.00, 
+                img: "imagens/azulejo.jpg", 
+                cat: "Quadros", 
+                desc: "Brilho espelhado com suporte incluso.",
+                opcoes: ["Tamanho 15x15 cm", "Tamanho 20x20 cm"]
+            },
+            { 
+                id: 5, 
+                nome: "Quadro MDF Minimalista", 
+                preco: 25.00, 
+                img: "imagens/mdf.jpg", 
+                cat: "Quadros", 
+                desc: "Acompanha fita dupla face de alta fixação.",
+                opcoes: ["A4 (20x30 cm)", "A3 (30x40 cm)"]
+            },
+            { 
+                id: 6, 
+                nome: "Squeeze Alumínio Escovado", 
+                preco: 39.90, 
+                img: "imagens/squeeze.jpg", 
+                cat: "Squeezes", 
+                desc: "Tampa com vedação hermética anti-vazamento.",
+                opcoes: ["Prata Escovado", "Branco Resinado"]
+            }
         ];
 
         let carrinho = [];
         let categoriaAtiva = "Todos";
 
-        // Inicializador do Sistema
         function init() {
             renderCategorias();
             renderProdutos();
         }
 
-        // Gera o menu de filtros baseado nos produtos existentes (Inteligente)
         function renderCategorias() {
             const menu = document.getElementById('categorias-menu');
             const categoriasUnicas = ["Todos", ...new Set(produtos.map(p => p.cat))];
-            
             menu.innerHTML = categoriasUnicas.map(cat => `
                 <li class="${cat === categoriaAtiva ? 'active' : ''}" onclick="setCategoria('${cat}')">
                     <i class="fa-solid fa-chevron-right"></i> ${cat}
@@ -149,12 +191,11 @@
             renderProdutos();
         }
 
-        // Filtro duplo: Busca por texto + Categoria ativa
         function filtrarProdutos() {
             renderProdutos();
         }
 
-        // Renderização dos cards holográficos/modernos
+        // Renderiza a vitrine contendo campos de texto e seleção de variantes
         function renderProdutos() {
             const vitrine = document.getElementById('produtos-vitrine');
             const termoBusca = document.getElementById('search-input').value.toLowerCase();
@@ -166,22 +207,32 @@
             });
 
             if (produtosFiltrados.length === 0) {
-                vitrine.innerHTML = `<div class="no-results">Nenhum produto encontrado para sua busca.</div>`;
+                vitrine.innerHTML = `<div class="no-results">Nenhum produto encontrado.</div>`;
                 return;
             }
 
             vitrine.innerHTML = produtosFiltrados.map(p => `
                 <div class="glass-card-product">
                     <div class="image-wrapper">
-                        <img src="${p.img}" alt="${p.nome}">
+                        <!-- Caso a imagem não exista na pasta, carrega um modelo temporário para não quebrar o site -->
+                        <img src="${p.img}" alt="${p.nome}" onerror="this.src='https://placeholder.com'">
                         <div class="product-badge">${p.cat}</div>
                     </div>
                     <div class="content">
                         <h3>${p.nome}</h3>
                         <p>${p.desc}</p>
+                        
+                        <!-- Inputs de Melhor Atendimento -->
+                        <div class="atendimento-campos">
+                            <select id="opcao-${p.id}" class="custom-select">
+                                ${p.opcoes.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                            </select>
+                            <input type="text" id="texto-${p.id}" class="custom-input" placeholder="Nome ou frase para estampar...">
+                        </div>
+
                         <div class="footer-row">
                             <span class="price">R$ ${p.preco.toFixed(2).replace('.', ',')}</span>
-                            <button class="add-to-cart-btn" onclick="adicionarAoCarrinho(${p.id})">
+                            <button class="add-to-cart-btn" onclick="capturarEAdicionar(${p.id})">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
                         </div>
@@ -190,34 +241,8 @@
             `).join('');
         }
 
-        // Controle da Gaveta Lateral
         function toggleCarrinho() {
             document.getElementById('carrinho-lateral').classList.toggle('active');
             document.getElementById('overlay').classList.toggle('active');
         }
-
-        // Adicionar Produto
-        function adicionarAoCarrinho(id) {
-            const produto = produtos.find(p => p.id === id);
-            const itemNoCarrinho = carrinho.find(item => item.id === id);
-
-            if (itemNoCarrinho) {
-                itemNoCarrinho.quantidade++;
-            } else {
-                carrinho.push({ ...produto, quantidade: 1 });
-            }
-            atualizarCarrinho();
-            
-            // Efeito visual rápido de abertura para feedback
-            const cartTrigger = document.querySelector('.cart-trigger');
-            cartTrigger.classList.add('pulse');
-            setTimeout(() => cartTrigger.classList.remove('pulse'), 300);
-        }
-
-        function alterarQuantidade(id, mod) {
-            const item = carrinho.find(item => item.id === id);
-            if (item) {
-                item.quantidade += mod;
-                if (item.quantidade <= 0) {
-                    carrinho = carrinho.filter(i => i.id !== id);
 
