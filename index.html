@@ -104,18 +104,15 @@
 
     <!-- Banco de Dados e Lógica Avançada -->
     <script>
-        /* 
-           📂 GUIA DE IMAGENS PARA O SEU COMPUTADOR:
-           Crie uma pasta chamada 'imagens' junto com o seu index.html.
-           Coloque suas fotos lá dentro com estes nomes exatos:
-           - caneca.jpg, camiseta.jpg, chaveiro.jpg, azulejo.jpg, mdf.jpg, squeeze.jpg
-        */
         const produtos = [
             { 
                 id: 1, 
                 nome: "Caneca Neo-Cerâmica", 
                 preco: 35.00, 
+                
+                // 📍 COLOQUE SUA IMAGEM AQUI (Caneca):
                 img: "imagens/caneca.jpg", 
+                
                 cat: "Canecas", 
                 desc: "Acabamento fosco de alta qualidade.",
                 opcoes: ["Porcelana Branca", "Interior Colorido", "Mágica Preta"]
@@ -124,7 +121,10 @@
                 id: 2, 
                 nome: "Camiseta Minimalist Heavyweight", 
                 preco: 49.90, 
+                
+                // 📍 COLOQUE SUA IMAGEM AQUI (Camiseta):
                 img: "imagens/camiseta.jpg", 
+                
                 cat: "Camisetas", 
                 desc: "Algodão premium 100% penteado.",
                 opcoes: ["Tamanho P", "Tamanho M", "Tamanho G", "Tamanho GG"]
@@ -133,7 +133,10 @@
                 id: 3, 
                 nome: "Chaveiro Polímero Esculpido", 
                 preco: 12.00, 
+                
+                // 📍 COLOQUE SUA IMAGEM AQUI (Chaveiro):
                 img: "imagens/chaveiro.jpg", 
+                
                 cat: "Chaveiros", 
                 desc: "Corte preciso a laser.",
                 opcoes: ["Formato Redondo", "Formato Quadrado", "Formato Coração"]
@@ -142,7 +145,10 @@
                 id: 4, 
                 nome: "Quadro em Azulejo Vitrificado", 
                 preco: 40.00, 
+                
+                // 📍 COLOQUE SUA IMAGEM AQUI (Quadro Azulejo):
                 img: "imagens/azulejo.jpg", 
+                
                 cat: "Quadros", 
                 desc: "Brilho espelhado com suporte incluso.",
                 opcoes: ["Tamanho 15x15 cm", "Tamanho 20x20 cm"]
@@ -151,7 +157,10 @@
                 id: 5, 
                 nome: "Quadro MDF Minimalista", 
                 preco: 25.00, 
+                
+                // 📍 COLOQUE SUA IMAGEM AQUI (Quadro MDF):
                 img: "imagens/mdf.jpg", 
+                
                 cat: "Quadros", 
                 desc: "Acompanha fita dupla face de alta fixação.",
                 opcoes: ["A4 (20x30 cm)", "A3 (30x40 cm)"]
@@ -160,7 +169,10 @@
                 id: 6, 
                 nome: "Squeeze Alumínio Escovado", 
                 preco: 39.90, 
+                
+                // 📍 COLOQUE SUA IMAGEM AQUI (Squeeze):
                 img: "imagens/squeeze.jpg", 
+                
                 cat: "Squeezes", 
                 desc: "Tampa com vedação hermética anti-vazamento.",
                 opcoes: ["Prata Escovado", "Branco Resinado"]
@@ -195,7 +207,6 @@
             renderProdutos();
         }
 
-        // Renderiza a vitrine contendo campos de texto e seleção de variantes
         function renderProdutos() {
             const vitrine = document.getElementById('produtos-vitrine');
             const termoBusca = document.getElementById('search-input').value.toLowerCase();
@@ -214,22 +225,18 @@
             vitrine.innerHTML = produtosFiltrados.map(p => `
                 <div class="glass-card-product">
                     <div class="image-wrapper">
-                        <!-- Caso a imagem não exista na pasta, carrega um modelo temporário para não quebrar o site -->
                         <img src="${p.img}" alt="${p.nome}" onerror="this.src='https://placeholder.com'">
                         <div class="product-badge">${p.cat}</div>
                     </div>
                     <div class="content">
                         <h3>${p.nome}</h3>
                         <p>${p.desc}</p>
-                        
-                        <!-- Inputs de Melhor Atendimento -->
                         <div class="atendimento-campos">
                             <select id="opcao-${p.id}" class="custom-select">
                                 ${p.opcoes.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
                             </select>
                             <input type="text" id="texto-${p.id}" class="custom-input" placeholder="Nome ou frase para estampar...">
                         </div>
-
                         <div class="footer-row">
                             <span class="price">R$ ${p.preco.toFixed(2).replace('.', ',')}</span>
                             <button class="add-to-cart-btn" onclick="capturarEAdicionar(${p.id})">
