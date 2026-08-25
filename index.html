@@ -3,113 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja de Personalizados - Sublimação & Brindes</title>
+    <title>Minha Loja de Personalizados</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Cabeçalho com Menu -->
+    <!-- Topo da Loja -->
     <header>
-        <div class="container navbar">
-            <div class="logo">🎨 Arte<span>Viva</span></div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active">Início</a></li>
-                    <li><a href="#produtos">Produtos</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-            </nav>
-        </div>
+        <h1>🛍️ Loja de Personalizados</h1>
+        <p>Escolha seus produtos e finalize o pedido pelo WhatsApp!</p>
     </header>
 
-    <!-- Banner de Destaque -->
-    <section class="hero">
-        <div class="hero-content">
-            <h2>Produtos Personalizados do Seu Jeito</h2>
-            <p>Os melhores presentes e brindes para eternizar momentos especiais.</p>
-            <a href="#produtos" class="btn">Ver Catálogo</a>
-        </div>
-    </section>
-
-    <!-- Seção de Produtos -->
-    <main class="container" id="produtos">
-        <h3 class="section-title">Nosso Catálogo</h3>
+    <!-- Grade de Produtos -->
+    <main class="produtos-container">
         
-        <div class="grid-produtos">
-            
-            <!-- Canecas -->
-            <div class="card">
-                <div class="img-placeholder">☕</div>
-                <div class="card-body">
-                    <h4>Caneca Personalizada</h4>
-                    <p>Porcelana premium com estampas brilhantes em alta definição.</p>
-                    <span class="preco">R$ 35,00</span>
-                    <button class="btn-comprar">Comprar Agora</button>
-                </div>
-            </div>
-
-            <!-- Camisetas -->
-            <div class="card">
-                <div class="img-placeholder">👕</div>
-                <div class="card-body">
-                    <h4>Camiseta Estampada</h4>
-                    <p>Tecido confortável com estampas duráveis e personalizadas.</p>
-                    <span class="preco">R$ 59,90</span>
-                    <button class="btn-comprar">Comprar Agora</button>
-                </div>
-            </div>
-
-            <!-- Chaveiros -->
-            <div class="card">
-                <div class="img-placeholder">🔑</div>
-                <div class="card-body">
-                    <h4>Chaveiro Customizado</h4>
-                    <p>Opções resinadas ou em metal para levar para qualquer lugar.</p>
-                    <span class="preco">R$ 15,00</span>
-                    <button class="btn-comprar">Comprar Agora</button>
-                </div>
-            </div>
-
-            <!-- Quadro em Azulejo -->
-            <div class="card">
-                <div class="img-placeholder">🧱</div>
-                <div class="card-body">
-                    <h4>Quadro em Azulejo</h4>
-                    <p>Azulejo de alto brilho com suporte, ideal para fotos marcantes.</p>
-                    <span class="preco">R$ 45,00</span>
-                    <button class="btn-comprar">Comprar Agora</button>
-                </div>
-            </div>
-
-            <!-- Quadro em MDF -->
-            <div class="card">
-                <div class="img-placeholder">🖼️</div>
-                <div class="card-body">
-                    <h4>Quadro em MDF</h4>
-                    <p>Placa decorativa em madeira MDF com fita dupla face inclusa.</p>
-                    <span class="preco">R$ 25,00</span>
-                    <button class="btn-comprar">Comprar Agora</button>
-                </div>
-            </div>
-
-            <!-- Squeeze -->
-            <div class="card">
-                <div class="img-placeholder">🧪</div>
-                <div class="card-body">
-                    <h4>Squeeze de Alumínio</h4>
-                    <p>Garrafa térmica ou simples para te acompanhar no treino e trabalho.</p>
-                    <span class="preco">R$ 40,00</span>
-                    <button class="btn-comprar">Comprar Agora</button>
-                </div>
-            </div>
-
+        <!-- Canecas -->
+        <div class="produto-card">
+            <img src="https://placeholder.com" alt="Caneca Personalizada">
+            <h3>Caneca Personalizada</h3>
+            <p class="preco">R$ 35,00</p>
+            <button onclick="comprar('Caneca Personalizada')">Comprar via WhatsApp</button>
         </div>
+
+        <!-- Camisetas -->
+        <div class="produto-card">
+            <img src="https://placeholder.com" alt="Camiseta Personalizada">
+            <h3>Camiseta Estampada</h3>
+            <p class="preco">R$ 49,90</p>
+            <button onclick="comprar('Camiseta Estampada')">Comprar via WhatsApp</button>
+        </div>
+
+        <!-- Chaveiros -->
+        <div class="produto-card">
+            <img src="https://placeholder.com" alt="Chaveiro">
+            <h3>Chaveiro Personalizado</h3>
+            <p class="preco">R$ 12,00</p>
+            <button onclick="comprar('Chaveiro Personalizado')">Comprar via WhatsApp</button>
+        </div>
+
+        <!-- Quadro em Azulejo -->
+        <div class="produto-card">
+            <img src="https://placeholder.com" alt="Quadro Azulejo">
+            <h3>Quadro em Azulejo</h3>
+            <p class="preco">R$ 40,00</p>
+            <button onclick="comprar('Quadro em Azulejo')">Comprar via WhatsApp</button>
+        </div>
+
+        <!-- Quadro em MDF -->
+        <div class="produto-card">
+            <img src="https://placeholder.com" alt="Quadro MDF">
+            <h3>Quadro em MDF</h3>
+            <p class="preco">R$ 25,00</p>
+            <button onclick="comprar('Quadro em MDF')">Comprar via WhatsApp</button>
+        </div>
+
+        <!-- Squeeze -->
+        <div class="produto-card">
+            <img src="https://placeholder.com" alt="Squeeze">
+            <h3>Squeeze (Garrafa)</h3>
+            <p class="preco">R$ 39,90</p>
+            <button onclick="comprar('Squeeze (Garrafa)')">Comprar via WhatsApp</button>
+        </div>
+
     </main>
 
-    <!-- Rodapé -->
     <footer>
-        <p>&copy; 2026 ArteViva Personalizados. Todos os direitos reservados.</p>
+        <p>&copy; 2026 Minha Loja Virtual. Todos os direitos reservados.</p>
     </footer>
 
+    <!-- Lógica de Envio para o WhatsApp -->
+    <script>
+        function comprar(nomeProduto) {
+            // Substitua pelo SEU número de WhatsApp (DDD + Número) sem espaços ou traços
+            const numeroTelefone = "5511999999999"; 
+            
+            // Mensagem automática que chegará no seu WhatsApp
+            const mensagem = `Olá! Gostaria de encomendar o seguinte produto: ${nomeProduto}`;
+            
+            // Cria o link do WhatsApp
+            const url = `https://whatsapp.com{numeroTelefone}&text=${encodeURIComponent(mensagem)}`;
+            
+            // Abre o link em uma nova aba
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
 </html>
