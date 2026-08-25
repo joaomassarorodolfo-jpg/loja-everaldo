@@ -3,90 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Loja de Personalizados</title>
+    <title>Personalize Art | Loja Virtual</title>
+    <!-- Ícones modernos -->
+    <link rel="stylesheet" href="https://cloudflare.com">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Topo da Loja -->
-    <header>
-        <h1>🛍️ Loja de Personalizados</h1>
-        <p>Escolha seus produtos e finalize o pedido pelo WhatsApp!</p>
+    <!-- Barra de Navegação -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">✨ Personalize<span>Art</span></a>
+            <div class="cart-icon" onclick="toggleCarrinho()">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count" class="cart-count">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner Principal -->
+    <header class="hero">
+        <div class="hero-content">
+            <h2>Produtos Exclusivos & Personalizados</h2>
+            <p>Do seu jeito, com a sua cara. Peça agora pelo WhatsApp!</p>
+        </div>
     </header>
 
-    <!-- Grade de Produtos -->
-    <main class="produtos-container">
-        
-        <!-- Canecas -->
-        <div class="produto-card">
-            <img src="https://placeholder.com" alt="Caneca Personalizada">
-            <h3>Caneca Personalizada</h3>
-            <p class="preco">R$ 35,00</p>
-            <button onclick="comprar('Caneca Personalizada')">Comprar via WhatsApp</button>
+    <!-- Vitrine de Produtos -->
+    <main class="container">
+        <h2 class="section-title">Nossos Produtos</h2>
+        <div class="produtos-grid" id="produtos-vitrine">
+            <!-- Os produtos serão gerados automaticamente pelo JavaScript para ficar mais limpo -->
         </div>
-
-        <!-- Camisetas -->
-        <div class="produto-card">
-            <img src="https://placeholder.com" alt="Camiseta Personalizada">
-            <h3>Camiseta Estampada</h3>
-            <p class="preco">R$ 49,90</p>
-            <button onclick="comprar('Camiseta Estampada')">Comprar via WhatsApp</button>
-        </div>
-
-        <!-- Chaveiros -->
-        <div class="produto-card">
-            <img src="https://placeholder.com" alt="Chaveiro">
-            <h3>Chaveiro Personalizado</h3>
-            <p class="preco">R$ 12,00</p>
-            <button onclick="comprar('Chaveiro Personalizado')">Comprar via WhatsApp</button>
-        </div>
-
-        <!-- Quadro em Azulejo -->
-        <div class="produto-card">
-            <img src="https://placeholder.com" alt="Quadro Azulejo">
-            <h3>Quadro em Azulejo</h3>
-            <p class="preco">R$ 40,00</p>
-            <button onclick="comprar('Quadro em Azulejo')">Comprar via WhatsApp</button>
-        </div>
-
-        <!-- Quadro em MDF -->
-        <div class="produto-card">
-            <img src="https://placeholder.com" alt="Quadro MDF">
-            <h3>Quadro em MDF</h3>
-            <p class="preco">R$ 25,00</p>
-            <button onclick="comprar('Quadro em MDF')">Comprar via WhatsApp</button>
-        </div>
-
-        <!-- Squeeze -->
-        <div class="produto-card">
-            <img src="https://placeholder.com" alt="Squeeze">
-            <h3>Squeeze (Garrafa)</h3>
-            <p class="preco">R$ 39,90</p>
-            <button onclick="comprar('Squeeze (Garrafa)')">Comprar via WhatsApp</button>
-        </div>
-
     </main>
 
+    <!-- Painel Lateral do Carrinho (Modal) -->
+    <div id="carrinho-lateral" class="carrinho-sidebar">
+        <div class="carrinho-header">
+            <h3>Seu Carrinho</h3>
+            <button class="close-btn" onclick="toggleCarrinho()">&times;</button>
+        </div>
+        
+        <div class="carrinho-itens" id="carrinho-itens-lista">
+            <!-- Itens adicionados aparecem aqui -->
+            <p class="carrinho-vazio">Seu carrinho está vazio...</p>
+        </div>
+
+        <div class="carrinho-footer">
+            <div class="total-container">
+                <span>Total:</span>
+                <span id="carrinho-total">R$ 0,00</span>
+            </div>
+            <button class="btn-finalizar" onclick="enviarPedidoWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Finalizar Pedido
+            </button>
+        </div>
+    </div>
+    <div id="overlay" class="overlay" onclick="toggleCarrinho()"></div>
+
     <footer>
-        <p>&copy; 2026 Minha Loja Virtual. Todos os direitos reservados.</p>
+        <p>&copy; 2026 Personalize Art. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Lógica de Envio para o WhatsApp -->
+    <!-- Lógica da Loja (JavaScript) -->
     <script>
-        function comprar(nomeProduto) {
-            // Substitua pelo SEU número de WhatsApp (DDD + Número) sem espaços ou traços
+        // Dados dos seus produtos (Fácil de alterar, mudar preço ou fotos depois)
+        const produtos = [
+            { id: 1, nome: "Caneca Personalizada", preco: 35.00, img: "https://unsplash.com", cat: "Canecas" },
+            { id: 2, nome: "Camiseta Estampada", preco: 49.90, img: "https://unsplash.com", cat: "Vestuário" },
+            { id: 3, nome: "Chaveiro Personalizado", preco: 12.00, img: "https://unsplash.com", cat: "Acessórios" },
+            { id: 4, nome: "Quadro em Azulejo", preco: 40.00, img: "https://unsplash.com", cat: "Decoração" },
+            { id: 5, nome: "Quadro em MDF", preco: 25.00, img: "https://unsplash.com", cat: "Decoração" },
+            { id: 6, nome: "Squeeze (Garrafa Térmica)", preco: 39.90, img: "https://unsplash.com", cat: "Squeezes" }
+        ];
+
+        let carrinho = [];
+
+        // Renderizar produtos na tela
+        function carregarProdutos() {
+            const vitrine = document.getElementById('produtos-vitrine');
+            vitrine.innerHTML = produtos.map(p => `
+                <div class="produto-card">
+                    <div class="tag">${p.cat}</div>
+                    <img src="${p.img}" alt="${p.nome}">
+                    <div class="produto-info">
+                        <h3>${p.nome}</h3>
+                        <p class="preco">R$ ${p.preco.toFixed(2).replace('.', ',')}</p>
+                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(${p.id})">
+                            <i class="fas fa-plus"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Abrir/Fechar Carrinho
+        function toggleCarrinho() {
+            document.getElementById('carrinho-lateral').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        // Adicionar item
+        function adicionarAoCarrinho(id) {
+            const produto = produtos.find(p => p.id === id);
+            const itemNoCarrinho = carrinho.find(item => item.id === id);
+
+            if (itemNoCarrinho) {
+                itemNoCarrinho.quantidade++;
+            } else {
+                carrinho.push({ ...produto, quantidade: 1 });
+            }
+            atualizarCarrinho();
+        }
+
+        // Mudar quantidade dentro do carrinho
+        function alterarQuantidade(id, mudança) {
+            const item = carrinho.find(item => item.id === id);
+            if (item) {
+                item.quantidade += mudança;
+                if (item.quantidade <= 0) {
+                    carrinho = carrinho.filter(i => i.id !== id);
+                }
+                atualizarCarrinho();
+            }
+        }
+
+        // Atualizar a interface do carrinho
+        function atualizarCarrinho() {
+            const lista = document.getElementById('carrinho-itens-lista');
+            const contador = document.getElementById('cart-count');
+            const totalEleq = document.getElementById('carrinho-total');
+
+            // Contador de itens do topo
+            const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+            contador.innerText = totalItens;
+
+            if (carrinho.length === 0) {
+                lista.innerHTML = '<p class="carrinho-vazio">Seu carrinho está vazio...</p>';
+                totalEleq.innerText = "R$ 0,00";
+                return;
+            }
+
+            // Gerar HTML dos itens
+            lista.innerHTML = carrinho.map(item => `
+                <div class="carrinho-item">
+                    <img src="${item.img}" alt="${item.nome}">
+                    <div class="item-detalhes">
+                        <h4>${item.nome}</h4>
+                        <p>R$ ${item.preco.toFixed(2).replace('.', ',')}</p>
+                        <div class="qtd-controles">
+                            <button onclick="alterarQuantidade(${item.id}, -1)">-</button>
+                            <span>${item.quantidade}</span>
+                            <button onclick="alterarQuantidade(${item.id}, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Calcular valor total
+            const valorTotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+            totalEleq.innerText = `R$ ${valorTotal.toFixed(2).replace('.', ',')}`;
+        }
+
+        // Enviar lista finalizada para o WhatsApp
+        function enviarPedidoWhatsApp() {
+            if (carrinho.length === 0) {
+                alert("Seu carrinho está vazio!");
+                return;
+            }
+
+            // INSIRA SEU NÚMERO AQUI (DDD + Número, tudo junto)
             const numeroTelefone = "5511999999999"; 
-            
-            // Mensagem automática que chegará no seu WhatsApp
-            const mensagem = `Olá! Gostaria de encomendar o seguinte produto: ${nomeProduto}`;
-            
-            // Cria o link do WhatsApp
+
+            let mensagem = "🛒 *Novo Pedido - Personalize Art*\n\n";
+            carrinho.forEach(item => {
+                mensagem += `• *${item.nome}* (Qtd: ${item.quantidade}) - R$ ${(item.preco * item.quantidade).toFixed(2)}\n`;
+            });
+
+            const valorTotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+            mensagem += `\n💰 *Total do Pedido:* R$ ${valorTotal.toFixed(2)}\n\n`;
+            mensagem += "Gostaria de combinar a personalização e a entrega! 😊";
+
             const url = `https://whatsapp.com{numeroTelefone}&text=${encodeURIComponent(mensagem)}`;
-            
-            // Abre o link em uma nova aba
             window.open(url, '_blank');
         }
+
+        // Iniciar vitrine
+        carregarProdutos();
     </script>
 </body>
 </html>
-p
+
