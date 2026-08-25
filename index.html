@@ -3,107 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personalize Art | Loja Virtual</title>
-    <!-- Ícones modernos -->
+    <title>Futura Studio | Experiência de Compra</title>
+    <!-- Fontes Premium e Ícones -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cloudflare.com">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Barra de Navegação -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">✨ Personalize<span>Art</span></a>
-            <div class="cart-icon" onclick="toggleCarrinho()">
-                <i class="fas fa-shopping-cart"></i>
-                <span id="cart-count" class="cart-count">0</span>
-            </div>
-        </div>
-    </nav>
+    <!-- Linha de Efeito de Luz Superior -->
+    <div class="top-glow"></div>
 
-    <!-- Banner Principal -->
-    <header class="hero">
-        <div class="hero-content">
-            <h2>Produtos Exclusivos & Personalizados</h2>
-            <p>Do seu jeito, com a sua cara. Peça agora pelo WhatsApp!</p>
-        </div>
-    </header>
-
-    <!-- Vitrine de Produtos -->
-    <main class="container">
-        <h2 class="section-title">Nossos Produtos</h2>
-        <div class="produtos-grid" id="produtos-vitrine">
-            <!-- Os produtos serão gerados automaticamente pelo JavaScript para ficar mais limpo -->
-        </div>
-    </main>
-
-    <!-- Painel Lateral do Carrinho (Modal) -->
-    <div id="carrinho-lateral" class="carrinho-sidebar">
-        <div class="carrinho-header">
-            <h3>Seu Carrinho</h3>
-            <button class="close-btn" onclick="toggleCarrinho()">&times;</button>
-        </div>
+    <!-- Interface Principal -->
+    <div class="app-layout">
         
-        <div class="carrinho-itens" id="carrinho-itens-lista">
-            <!-- Itens adicionados aparecem aqui -->
-            <p class="carrinho-vazio">Seu carrinho está vazio...</p>
-        </div>
-
-        <div class="carrinho-footer">
-            <div class="total-container">
-                <span>Total:</span>
-                <span id="carrinho-total">R$ 0,00</span>
+        <!-- Painel Lateral de Navegação e Filtros (Fixo) -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">F</div>
+                <h2>Futura<span>Studio</span></h2>
             </div>
-            <button class="btn-finalizar" onclick="enviarPedidoWhatsApp()">
-                <i class="fab fa-whatsapp"></i> Finalizar Pedido
-            </button>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Buscar produto do futuro..." oninput="filtrarProdutos()">
+            </div>
+
+            <div class="filter-section">
+                <h3>Categorias</h3>
+                <ul class="filter-menu" id="categorias-menu">
+                    <!-- Gerado por JS para escala futura -->
+                </ul>
+            </div>
+
+            <div class="sidebar-footer">
+                <p>⚡ Powered by GitHub Pages</p>
+            </div>
+        </aside>
+
+        <!-- Área Principal de Conteúdo -->
+        <main class="main-content">
+            
+            <!-- Barra Superior Dinâmica -->
+            <header class="topbar">
+                <div class="welcome-text">
+                    <h1>Coleção Exclusiva</h1>
+                    <p>Produtos premium customizados sob demanda.</p>
+                </div>
+                
+                <!-- Botão Flutuante do Carrinho de Alta Tecnologia -->
+                <div class="cart-trigger" onclick="toggleCarrinho()">
+                    <div class="cart-icon-wrapper">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span id="cart-count" class="badge">0</span>
+                    </div>
+                    <div class="cart-trigger-info">
+                        <span>Sacola</span>
+                        <b id="cart-total-trigger">R$ 0,00</b>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Vitrine Infinita -->
+            <section class="gallery-section">
+                <div class="grid-gallery" id="produtos-vitrine">
+                    <!-- Cards de Produtos Gerados Dinamicamente -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Gaveta do Carrinho Cinemática -->
+    <div id="carrinho-lateral" class="glass-cart">
+        <div class="cart-inner">
+            <div class="cart-header">
+                <h2>Seu Pedido</h2>
+                <button class="close-cart" onclick="toggleCarrinho()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div class="cart-body" id="carrinho-itens-lista">
+                <!-- Estado vazio inicial -->
+                <div class="empty-state">
+                    <i class="fa-solid fa-box-open"></i>
+                    <p>Sua sacola está vazia.</p>
+                    <span>Adicione itens para iniciar.</span>
+                </div>
+            </div>
+
+            <div class="cart-footer">
+                <div class="summary-line">
+                    <span>Subtotal</span>
+                    <span id="carrinho-total">R$ 0,00</span>
+                </div>
+                <div class="summary-line total">
+                    <span>Total estimado</span>
+                    <span id="carrinho-total-final">R$ 0,00</span>
+                </div>
+                <button class="btn-checkout" onclick="enviarPedidoWhatsApp()">
+                    <span>Enviar para produção via WhatsApp</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
         </div>
     </div>
-    <div id="overlay" class="overlay" onclick="toggleCarrinho()"></div>
+    <div id="overlay" class="blur-overlay" onclick="toggleCarrinho()"></div>
 
-    <footer>
-        <p>&copy; 2026 Personalize Art. Todos os direitos reservados.</p>
-    </footer>
-
-    <!-- Lógica da Loja (JavaScript) -->
+    <!-- Banco de Dados e Motor da Loja -->
     <script>
-        // Dados dos seus produtos (Fácil de alterar, mudar preço ou fotos depois)
+        // BANCO DE DADOS EM JAVASCRIPT: Para o futuro, basta adicionar novos objetos aqui dentro!
         const produtos = [
-            { id: 1, nome: "Caneca Personalizada", preco: 35.00, img: "https://unsplash.com", cat: "Canecas" },
-            { id: 2, nome: "Camiseta Estampada", preco: 49.90, img: "https://unsplash.com", cat: "Vestuário" },
-            { id: 3, nome: "Chaveiro Personalizado", preco: 12.00, img: "https://unsplash.com", cat: "Acessórios" },
-            { id: 4, nome: "Quadro em Azulejo", preco: 40.00, img: "https://unsplash.com", cat: "Decoração" },
-            { id: 5, nome: "Quadro em MDF", preco: 25.00, img: "https://unsplash.com", cat: "Decoração" },
-            { id: 6, nome: "Squeeze (Garrafa Térmica)", preco: 39.90, img: "https://unsplash.com", cat: "Squeezes" }
+            { id: 1, nome: "Caneca Neo-Cerâmica", preco: 35.00, img: "https://unsplash.com", cat: "Canecas", desc: "Acabamento fosco, ergonomia perfeita para o dia a dia." },
+            { id: 2, nome: "Camiseta Minimalist Heavyweight", preco: 49.90, img: "https://unsplash.com", cat: "Camisetas", desc: "Algodão premium 100%, caimento streetwear despojado." },
+            { id: 3, nome: "Chaveiro Polímero Esculpido", preco: 12.00, img: "https://unsplash.com", cat: "Chaveiros", desc: "Corte cirúrgico a laser com argola reforçada em titânio." },
+            { id: 4, nome: "Quadro em Azulejo Vitrificado", preco: 40.00, img: "https://unsplash.com", cat: "Quadros", desc: "Brilho espelhado de alta durabilidade com suporte premium." },
+            { id: 5, nome: "Quadro MDF Minimalista", preco: 25.00, img: "https://unsplash.com", cat: "Quadros", desc: "Madeira ecológica texturizada pronta para fixação sem furos." },
+            { id: 6, nome: "Squeeze Alumínio Escovado", preco: 39.90, img: "https://unsplash.com", cat: "Squeezes", desc: "Isolamento térmico leve, tampa com vedação a vácuo." }
         ];
 
         let carrinho = [];
+        let categoriaAtiva = "Todos";
 
-        // Renderizar produtos na tela
-        function carregarProdutos() {
+        // Inicializador do Sistema
+        function init() {
+            renderCategorias();
+            renderProdutos();
+        }
+
+        // Gera o menu de filtros baseado nos produtos existentes (Inteligente)
+        function renderCategorias() {
+            const menu = document.getElementById('categorias-menu');
+            const categoriasUnicas = ["Todos", ...new Set(produtos.map(p => p.cat))];
+            
+            menu.innerHTML = categoriasUnicas.map(cat => `
+                <li class="${cat === categoriaAtiva ? 'active' : ''}" onclick="setCategoria('${cat}')">
+                    <i class="fa-solid fa-chevron-right"></i> ${cat}
+                </li>
+            `).join('');
+        }
+
+        function setCategoria(cat) {
+            categoriaAtiva = cat;
+            renderCategorias();
+            renderProdutos();
+        }
+
+        // Filtro duplo: Busca por texto + Categoria ativa
+        function filtrarProdutos() {
+            renderProdutos();
+        }
+
+        // Renderização dos cards holográficos/modernos
+        function renderProdutos() {
             const vitrine = document.getElementById('produtos-vitrine');
-            vitrine.innerHTML = produtos.map(p => `
-                <div class="produto-card">
-                    <div class="tag">${p.cat}</div>
-                    <img src="${p.img}" alt="${p.nome}">
-                    <div class="produto-info">
+            const termoBusca = document.getElementById('search-input').value.toLowerCase();
+
+            const produtosFiltrados = produtos.filter(p => {
+                const matchesCat = (categoriaAtiva === "Todos" || p.cat === categoriaAtiva);
+                const matchesBusca = p.nome.toLowerCase().includes(termoBusca) || p.desc.toLowerCase().includes(termoBusca);
+                return matchesCat && matchesBusca;
+            });
+
+            if (produtosFiltrados.length === 0) {
+                vitrine.innerHTML = `<div class="no-results">Nenhum produto encontrado para sua busca.</div>`;
+                return;
+            }
+
+            vitrine.innerHTML = produtosFiltrados.map(p => `
+                <div class="glass-card-product">
+                    <div class="image-wrapper">
+                        <img src="${p.img}" alt="${p.nome}">
+                        <div class="product-badge">${p.cat}</div>
+                    </div>
+                    <div class="content">
                         <h3>${p.nome}</h3>
-                        <p class="preco">R$ ${p.preco.toFixed(2).replace('.', ',')}</p>
-                        <button class="btn-adicionar" onclick="adicionarAoCarrinho(${p.id})">
-                            <i class="fas fa-plus"></i> Adicionar ao Carrinho
-                        </button>
+                        <p>${p.desc}</p>
+                        <div class="footer-row">
+                            <span class="price">R$ ${p.preco.toFixed(2).replace('.', ',')}</span>
+                            <button class="add-to-cart-btn" onclick="adicionarAoCarrinho(${p.id})">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             `).join('');
         }
 
-        // Abrir/Fechar Carrinho
+        // Controle da Gaveta Lateral
         function toggleCarrinho() {
             document.getElementById('carrinho-lateral').classList.toggle('active');
             document.getElementById('overlay').classList.toggle('active');
         }
 
-        // Adicionar item
+        // Adicionar Produto
         function adicionarAoCarrinho(id) {
             const produto = produtos.find(p => p.id === id);
             const itemNoCarrinho = carrinho.find(item => item.id === id);
@@ -114,83 +207,17 @@
                 carrinho.push({ ...produto, quantidade: 1 });
             }
             atualizarCarrinho();
+            
+            // Efeito visual rápido de abertura para feedback
+            const cartTrigger = document.querySelector('.cart-trigger');
+            cartTrigger.classList.add('pulse');
+            setTimeout(() => cartTrigger.classList.remove('pulse'), 300);
         }
 
-        // Mudar quantidade dentro do carrinho
-        function alterarQuantidade(id, mudança) {
+        function alterarQuantidade(id, mod) {
             const item = carrinho.find(item => item.id === id);
             if (item) {
-                item.quantidade += mudança;
+                item.quantidade += mod;
                 if (item.quantidade <= 0) {
                     carrinho = carrinho.filter(i => i.id !== id);
-                }
-                atualizarCarrinho();
-            }
-        }
-
-        // Atualizar a interface do carrinho
-        function atualizarCarrinho() {
-            const lista = document.getElementById('carrinho-itens-lista');
-            const contador = document.getElementById('cart-count');
-            const totalEleq = document.getElementById('carrinho-total');
-
-            // Contador de itens do topo
-            const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
-            contador.innerText = totalItens;
-
-            if (carrinho.length === 0) {
-                lista.innerHTML = '<p class="carrinho-vazio">Seu carrinho está vazio...</p>';
-                totalEleq.innerText = "R$ 0,00";
-                return;
-            }
-
-            // Gerar HTML dos itens
-            lista.innerHTML = carrinho.map(item => `
-                <div class="carrinho-item">
-                    <img src="${item.img}" alt="${item.nome}">
-                    <div class="item-detalhes">
-                        <h4>${item.nome}</h4>
-                        <p>R$ ${item.preco.toFixed(2).replace('.', ',')}</p>
-                        <div class="qtd-controles">
-                            <button onclick="alterarQuantidade(${item.id}, -1)">-</button>
-                            <span>${item.quantidade}</span>
-                            <button onclick="alterarQuantidade(${item.id}, 1)">+</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-
-            // Calcular valor total
-            const valorTotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
-            totalEleq.innerText = `R$ ${valorTotal.toFixed(2).replace('.', ',')}`;
-        }
-
-        // Enviar lista finalizada para o WhatsApp
-        function enviarPedidoWhatsApp() {
-            if (carrinho.length === 0) {
-                alert("Seu carrinho está vazio!");
-                return;
-            }
-
-            // INSIRA SEU NÚMERO AQUI (DDD + Número, tudo junto)
-            const numeroTelefone = "5511999999999"; 
-
-            let mensagem = "🛒 *Novo Pedido - Personalize Art*\n\n";
-            carrinho.forEach(item => {
-                mensagem += `• *${item.nome}* (Qtd: ${item.quantidade}) - R$ ${(item.preco * item.quantidade).toFixed(2)}\n`;
-            });
-
-            const valorTotal = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
-            mensagem += `\n💰 *Total do Pedido:* R$ ${valorTotal.toFixed(2)}\n\n`;
-            mensagem += "Gostaria de combinar a personalização e a entrega! 😊";
-
-            const url = `https://whatsapp.com{numeroTelefone}&text=${encodeURIComponent(mensagem)}`;
-            window.open(url, '_blank');
-        }
-
-        // Iniciar vitrine
-        carregarProdutos();
-    </script>
-</body>
-</html>
 
