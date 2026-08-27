@@ -3,127 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMAGEM E FORMA</title>
-    
-    <!-- ESTILO DA PÁGINA (CSS) -->
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; text-align: center; }
-        header { margin-bottom: 30px; }
-        h1 { color: #ff5722; }
-        
-        /* Organiza as caixas dos produtos uma ao lado da outra */
-        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        
-        /* Estilo da caixinha de cada produto */
-        .card { background: white; border-radius: 10px; padding: 15px; width: 250px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        
-        /* Estilo da foto do produto */
-        .product-img { width: 100%; height: 200px; object-fit: cover; border-radius: 6px; }
-        
-        .price { color: #2e7d32; font-weight: bold; font-size: 18px; margin: 10px 0; }
-        
-        /* Botão verde do WhatsApp */
-        button { background-color: #25d366; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-weight: bold; width: 100%; font-size: 15px; }
-        button:hover { background-color: #1ebe5d; }
-    </style>
+    <title>Minha Loja Personalizada</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ícones do WhatsApp -->
+    <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body>
 
+    <!-- Cabeçalho da Loja -->
     <header>
-        <h1>🎨 IMAGEM E FORMA</h1>
-        <p>Escolha seu produto e clique para pedir no WhatsApp!
-            PREÇO PODE VARIAR DEPENDENDO DO MODELO!
-        </p>
+        <h1>Loja Personalizados</h1>
+        <p>Transformamos suas ideias em presentes únicos!</p>
     </header>
 
-    <!-- VITRINE DE PRODUTOS -->
-    <div class="container">
+    <!-- Vitrine de Produtos -->
+    <main class="container">
+        <h2>Nossos Produtos</h2>
+        
+        <div class="grid-produtos">
+            
+            <!-- Produto 1: Camisa -->
+            <div class="card-produto">
+                <img src="imagens/camisa.jpg" alt="Camisa Personalizada">
+                <h3>Camisa Personalizada</h3>
+                <p class="descricao">100% algodão, estampa de alta durabilidade.</p>
+                <span class="preco">R$ 45,00</span>
+                <a href="https://wa.me." class="btn-comprar" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Comprar no WhatsApp
+                </a>
+            </div>
 
-        <!-- PRODUTO 1: CANECA -->
-        <div class="card">
-            <!-- 📸 COLOQUE O LINK DA FOTO DA CANECA ENTRE AS ASPAS ABAIXO -->
-            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DA_CANECA_AQUI" alt="Caneca">
-            <h3>Caneca Personalizada</h3>
-            <div class="price">R$ 30,00</div>
-            <button onclick="comprar('Caneca Personalizada')">Comprar no WhatsApp</button>
+            <!-- Produto 2: Caneca -->
+            <div class="card-produto">
+                <img src="imagens/caneca.jpg" alt="Caneca Personalizada">
+                <h3>Caneca de Porcelana</h3>
+                <p class="descricao">Resistente a micro-ondas e lava-louças.</p>
+                <span class="preco">R$ 30,00</span>
+                <a href="https://wa.me." class="btn-comprar" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Comprar no WhatsApp
+                </a>
+            </div>
+
+            <!-- Produto 3: Chaveiro -->
+            <div class="card-produto">
+                <img src="imagens/chaveiro.jpg" alt="Chaveiro Personalizado">
+                <h3>Chaveiro Personalizado</h3>
+                <p class="descricao">Lembrança perfeita com sua foto ou logo.</p>
+                <span class="preco">R$ 12,00</span>
+                <a href="https://wa.me." class="btn-comprar" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Comprar no WhatsApp
+                </a>
+            </div>
+
+            <!-- Produto 4: Almofada -->
+            <div class="card-produto">
+                <img src="imagens/almofada.jpg" alt="Almofada Personalizada">
+                <h3>Almofada Personalizada</h3>
+                <p class="descricao">Com enchimento macio e capa com zíper.</p>
+                <span class="preco">R$ 40,00</span>
+                <a href="https://wa.me." class="btn-comprar" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Comprar no WhatsApp
+                </a>
+            </div>
+
+            <!-- Produto 5: Quadro em Azulejo -->
+            <div class="card-produto">
+                <img src="imagens/azulejo.jpg" alt="Quadro em Azulejo">
+                <h3>Quadro em Azulejo</h3>
+                <p class="descricao">Acompanha suporte de apoio para mesa.</p>
+                <span class="preco">R$ 35,00</span>
+                <a href="https://wa.me." class="btn-comprar" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Comprar no WhatsApp
+                </a>
+            </div>
+
+            <!-- Produto 6: Quadro em MDF -->
+            <div class="card-produto">
+                <img src="imagens/mdf.jpg" alt="Quadro em MDF">
+                <h3>Quadro em MDF</h3>
+                <p class="descricao">Corte a laser com alta definição de imagem.</p>
+                <span class="preco">R$ 50,00</span>
+                <a href="https://wa.me." class="btn-comprar" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Comprar no WhatsApp
+                </a>
+            </div>
+
+            <!-- Produto 7: Squeeze -->
+            <div class="card-produto">
+                <img src="imagens/squeeze.jpg" alt="Squeeze Personalizada">
+                <h3>Squeeze (Garrafinha)</h3>
+                <p class="descricao">Alumínio, ideal para academia ou passeios.</p>
+                <span class="preco">R$ 35,00</span>
+                <a href="https://wa.me." class="btn-comprar" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Comprar no WhatsApp
+                </a>
+            </div>
+
+            <!-- Produto 8: Chinelo -->
+            <div class="card-produto">
+                <img src="imagens/chinelo.jpg" alt="Chinelo Personalizado">
+                <h3>Chinelo Personalizado</h3>
+                <p class="descricao">Borracha macia, numeração do 33 ao 44.</p>
+                <span class="preco">R$ 38,00</span>
+                <a href="https://wa.me." class="btn-comprar" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Comprar no WhatsApp
+                </a>
+            </div>
+
         </div>
+    </main>
 
-        <!-- PRODUTO 2: CAMISETA -->
-        <div class="card">
-            <!-- 📸 COLOQUE O LINK DA FOTO DA CAMISETA ENTRE AS ASPAS ABAIXO -->
-            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DA_CAMISETA_AQUI" alt="Camiseta">
-            <h3>Camiseta Personalizada</h3>
-            <div class="price">R$ 50,00</div>
-            <button onclick="comprar('Camiseta Personalizada')">Comprar no WhatsApp</button>
-        </div>
-
-        <!-- PRODUTO 3: CHAVEIRO -->
-        <div class="card">
-            <!-- 📸 COLOQUE O LINK DA FOTO DO CHAVEIRO ENTRE AS ASPAS ABAIXO -->
-            <img class="product-img" src="—Pngtree—leather keychain_6433484.png" alt="Chaveiro">
-            <h3>Chaveiro</h3>
-            <div class="price">R$ 15,00</div>
-            <button onclick="comprar('Chaveiro')">Comprar no WhatsApp</button>
-        </div>
-
-        <!-- PRODUTO 4: QUADRO AZULEJO -->
-        <div class="card">
-            <!-- 📸 COLOQUE O LINK DA FOTO DO AZULEJO ENTRE AS ASPAS ABAIXO -->
-            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DO_AZULEJO_AQUI" alt="Quadro Azulejo">
-            <h3>Quadro em Azulejo</h3>
-            <div class="price">R$ 45,00</div>
-            <button onclick="comprar('Quadro em Azulejo')">Comprar no WhatsApp</button>
-        </div>
-
-        <!-- PRODUTO 5: QUADRO MDF -->
-        <div class="card">
-            <!-- 📸 COLOQUE O LINK DA FOTO DO MDF ENTRE AS ASPAS ABAIXO -->
-            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DO_QUADRO_MDF_AQUI" alt="Quadro MDF">
-            <h3>Quadro MDF</h3>
-            <div class="price">R$ 40,00</div>
-            <button onclick="comprar('Quadro MDF')">Comprar no WhatsApp</button>
-        </div>
-
-        <!-- PRODUTO 6: SQUEEZE -->
-        <div class="card">
-            <!-- 📸 COLOQUE O LINK DA FOTO DO SQUEEZE ENTRE AS ASPAS ABAIXO -->
-            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DO_SQUEEZE_AQUI" alt="Squeeze">
-            <h3>Squeeze (Garrafinha)</h3>
-            <div class="price">R$ 40,00</div>
-            <button onclick="comprar('Squeeze (Garrafinha)')">Comprar no WhatsApp</button>
-        </div>
-
-        <!-- PRODUTO 7: CHINELO -->
-        <div class="card">
-            <!-- 📸 COLOQUE O LINK DA FOTO DO CHINELO ENTRE AS ASPAS ABAIXO -->
-            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DO_CHINELO_AQUI" alt="Chinelo">
-            <h3>Chinelo Personalizado</h3>
-            <div class="price">R$ 35,00</div>
-            <button onclick="comprar('Chinelo Personalizado')">Comprar no WhatsApp</button>
-        </div>
-
-        <!-- PRODUTO 8: ALMOFADA -->
-        <div class="card">
-            <!-- 📸 COLOQUE O LINK DA FOTO DA ALMOFADA ENTRE AS ASPAS ABAIXO -->
-            <img class="product-img" src="COLE_O_LINK_DA_FOTO_DA_ALMOFADA_AQUI" alt="Almofada">
-            <h3>Almofada</h3>
-            <div class="price">R$ 45,00</div>
-            <button onclick="comprar('Almofada')">Comprar no WhatsApp</button>
-        </div>
-
-    </div>
-
-    <!-- SCRIPT QUE FAZ O BOTÃO FUNCIONAR -->
-    <script>
-        // 🚨 MUDE AQUI: Coloque o seu número do WhatsApp completo (Apenas números)
-        const meuNumeroWhatsApp = "5541991461098"; 
-
-        function comprar(nomeProduto) {
-            const mensagem = `Olá! Gostaria de encomendar: ${nomeProduto}`;
-            const url = `https://whatsapp.com{meuNumeroWhatsApp}&text=${encodeURIComponent(mensagem)}`;
-            window.open(url, '_blank');
-        }
-    </script>
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 - Minha Loja de Personalizados. Todos os direitos reservados.</p>
+    </footer>
 
 </body>
 </html>
