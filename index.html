@@ -3,141 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FleetTag Pro - Sistema de Gestão de Pedágios</title>
-    <!-- Tailwind CSS para Visual Moderno de Alta Performance -->
-    <script src="https://tailwindcss.com"></script>
-    <!-- Ícones Lucide para acabamento profissional -->
-    <script src="https://unpkg.com"></script>
+    <title>Controle de Faturas de Veículos</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --success: #2ecc71;
+            --danger: #e74c3c;
+            --warning: #f1c40f;
+            --light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #eef2f3;
+            color: #333;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 { text-align: center; color: var(--primary); }
+        form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 6px;
+        }
+        input, select, button {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover { opacity: 0.9; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th { background-color: var(--primary); color: white; }
+        .badge {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 12px;
+            display: inline-block;
+        }
+        .status-pago { background: var(--success); color: white; }
+        .status-atrasado { background: var(--danger); color: white; }
+        .status-pendente { background: var(--warning); color: #333; }
+        .btn-delete { background: #666; padding: 5px 10px; font-size: 12px; }
+    </style>
 </head>
-<body class="bg-gray-900 text-gray-100 font-sans min-h-screen">
+<body>
 
-    <div class="flex h-screen overflow-hidden">
-        <!-- Barra Lateral de Navegação (Sidebar) -->
-        <aside class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col justify-between">
-            <div class="p-6">
-                <div class="flex items-center space-x-3 mb-8">
-                    <div class="bg-blue-600 p-2 rounded-lg text-white">
-                        <i data-lucide="truck" class="w-6 h-6"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-lg font-bold tracking-wider text-white">FleetTag <span class="text-blue-500">Pro</span></h1>
-                        <p class="text-xs text-gray-400">Enterprise Control</p>
-                    </div>
-                </div>
-                <nav class="space-y-2">
-                    <a href="#" class="flex items-center space-x-3 bg-blue-600/10 text-blue-400 p-3 rounded-lg font-medium transition">
-                        <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-                        <span>Dashboard</span>
-                    </a>
-                    <a href="#" class="flex items-center space-x-3 text-gray-400 hover:bg-gray-700/50 hover:text-gray-200 p-3 rounded-lg font-medium transition">
-                        <i data-lucide="car" class="w-5 h-5"></i>
-                        <span>Frota Ativa</span>
-                    </a>
-                    <a href="#" class="flex items-center space-x-3 text-gray-400 hover:bg-gray-700/50 hover:text-gray-200 p-3 rounded-lg font-medium transition">
-                        <i data-lucide="credit-card" class="w-5 h-5"></i>
-                        <span>Tags & Custos</span>
-                    </a>
-                </nav>
-            </div>
-            <div class="p-6 border-t border-gray-700 text-xs text-gray-400">
-                Sessão segura: Diretoria Executiva
-            </div>
-        </aside>
+<div class="container">
+    <h1>Controle de Faturas de Veículos</h1>
+    
+    <!-- Formulário de Cadastro -->
+    <form id="faturaForm">
+        <input type="text" id="veiculo" placeholder="Veículo (Ex: Gol ABC-1234)" required>
+        <input type="text" id="descricao" placeholder="Descrição (Ex: Seguro, Manutenção)" required>
+        <input type="number" id="valor" placeholder="Valor (R\$)" step="0.01" required>
+        <input type="date" id="vencimento" required>
+        <select id="status">
+            <option value="Pendente">Pendente</option>
+            <option value="Pago">Pago</option>
+        </select>
+        <button type="submit">Adicionar</button>
+    </form>
 
-        <!-- Conteúdo Principal -->
-        <main class="flex-1 flex flex-col overflow-y-auto bg-gray-950">
-            <!-- Header Superior -->
-            <header class="h-20 bg-gray-900/50 backdrop-blur border-b border-gray-800 flex items-center justify-between px-8">
-                <div>
-                    <h2 class="text-xl font-semibold text-white">Painel Executivo de Telemetria</h2>
-                    <p class="text-xs text-gray-400">Monitoramento em tempo real de +1.000 ativos em trânsito</p>
-                </div>
-                <!-- Área de Importação da Planilha -->
-                <div class="flex items-center space-x-4">
-                    <label class="flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg font-medium shadow-lg shadow-emerald-900/20 transition cursor-pointer text-sm">
-                        <i data-lucide="file-spreadsheet" class="w-4 h-4"></i>
-                        <span>Importar Excel (.CSV)</span>
-                        <input type="file" id="csvFileInput" accept=".csv" class="hidden" onchange="handleCSVImport(event)">
-                    </label>
-                </div>
-            </header>
+    <!-- Tabela de Dados -->
+    <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Veículo</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Vencimento</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaCorpo">
+                <!-- Linhas inseridas via JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
 
-            <!-- Grid de Indicadores Estratégicos (KPIs) -->
-            <section class="p-8 grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="bg-gray-900 border border-gray-800 p-6 rounded-xl shadow-md">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-medium text-gray-400">Total da Frota</span>
-                        <div class="bg-blue-500/10 p-2 rounded-lg text-blue-400"><i data-lucide="shield" class="w-5 h-5"></i></div>
-                    </div>
-                    <div class="text-3xl font-bold text-white mb-1" id="kpiTotal">1,042</div>
-                    <p class="text-xs text-emerald-400 flex items-center"><i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> +4.2% este mês</p>
-                </div>
+<script>
+    const form = document.getElementById('faturaForm');
+    const tabela = document.getElementById('tabelaCorpo');
 
-                <div class="bg-gray-900 border border-gray-800 p-6 rounded-xl shadow-md">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-medium text-gray-400">Caminhões (Pesados)</span>
-                        <div class="bg-amber-500/10 p-2 rounded-lg text-amber-400"><i data-lucide="truck" class="w-5 h-5"></i></div>
-                    </div>
-                    <div class="text-3xl font-bold text-white mb-1" id="kpiCaminhoes">618</div>
-                    <p class="text-xs text-gray-400">60% da operação ativa</p>
-                </div>
+    // Carregar faturas salvas ou iniciar lista vazia
+    let faturas = JSON.parse(localStorage.getItem('faturas_veiculos')) || [];
 
-                <div class="bg-gray-900 border border-gray-800 p-6 rounded-xl shadow-md">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-medium text-gray-400">Carros (Leves)</span>
-                        <div class="bg-purple-500/10 p-2 rounded-lg text-purple-400"><i data-lucide="car" class="w-5 h-5"></i></div>
-                    </div>
-                    <div class="text-3xl font-bold text-white mb-1" id="kpiCarros">424</div>
-                    <p class="text-xs text-gray-400">Uso comercial / operacional</p>
-                </div>
+    function salvarDados() {
+        localStorage.setItem('faturas_veiculos', JSON.stringify(faturas));
+        renderizarTabela();
+    }
 
-                <div class="bg-gray-900 border border-gray-800 p-6 rounded-xl shadow-md">
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-sm font-medium text-gray-400">Saldo Global em Tags</span>
-                        <div class="bg-emerald-500/10 p-2 rounded-lg text-emerald-400"><i data-lucide="dollar-sign" class="w-5 h-5"></i></div>
-                    </div>
-                    <div class="text-3xl font-bold text-white mb-1" id="kpiSaldo">R$ 142.850</div>
-                    <p class="text-xs text-amber-400 flex items-center"><i data-lucide="alert-triangle" class="w-3 h-3 mr-1"></i> Reabastecimento automático ativo</p>
-                </div>
-            </section>
+    function renderizarTabela() {
+        tabela.innerHTML = '';
+        const hoje = new Date().toISOString().split('T')[0];
 
-            <!-- Tabela Executiva de Veículos -->
-            <section class="px-8 pb-8 flex-1">
-                <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden flex flex-col h-full max-h-[500px]">
-                    <div class="p-6 border-b border-gray-800 flex items-center justify-between bg-gray-900/50">
-                        <h3 class="font-semibold text-lg text-white">Monitoramento de Passagens e Status</h3>
-                        <div class="flex space-x-2">
-                            <input type="text" id="searchInput" placeholder="Buscar por placa ou tag..." class="bg-gray-800 text-sm px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:border-blue-500 text-gray-200 w-64" oninput="filterTable()">
-                        </div>
-                    </div>
-                    
-                    <div class="overflow-y-auto flex-1">
-                        <table class="w-full text-left text-sm">
-                            <thead class="bg-gray-800/50 text-gray-400 uppercase text-xs tracking-wider sticky top-0 backdrop-blur z-10 border-b border-gray-800">
-                                <tr>
-                                    <th class="py-4 px-6">Placa</th>
-                                    <th class="py-4 px-6">Modelo</th>
-                                    <th class="py-4 px-6">Categoria</th>
-                                    <th class="py-4 px-6">Número da Tag</th>
-                                    <th class="py-4 px-6">Saldo Individual</th>
-                                    <th class="py-4 px-6 text-center">Status Operacional</th>
-                                </tr>
-                            </thead>
-                            <tbody id="fleetTableBody" class="divide-y divide-gray-800 text-gray-300">
-                                <!-- Dados Iniciais Dummy (para a tela não abrir em branco caso não importem o Excel) -->
-                                <tr>
-                                    <td class="py-4 px-6 font-mono font-semibold text-blue-400">ABC-1234</td>
-                                    <td class="py-4 px-6">Volvo FH 540</td>
-                                    <td class="py-4 px-6"><span class="bg-amber-500/10 text-amber-400 text-xs px-2.5 py-1 rounded-full font-medium">Caminhão</span></td>
-                                    <td class="py-4 px-6 font-mono text-gray-400">10928374829</td>
-                                    <td class="py-4 px-6 text-emerald-400 font-medium">R$ 1.250,00</td>
-                                    <td class="py-4 px-6 text-center"><span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-semibold">Em Andamento</span></td>
-                                </tr>
-                                <tr>
-                                    <td class="py-4 px-6 font-mono font-semibold text-blue-400">XYZ-9876</td>
-                                    <td class="py-4 px-6">Scania R450</td>
-                                    <td class="py-4 px-6"><span class="bg-amber-500/10 text-amber-400 text-xs px-2.5 py-1 rounded-full font-medium">Caminhão</span></td>
-                                    <td class="py-4 px-6 font-mono text-gray-400">10928374850</td>
-                                    <td class="py-4 px-6 text-emerald-400 font-medium">R$ 890,00</td>
-                                    <td class="py-4 px-6 text-center"><span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-semibold">Em Andamento</span></td>
-                                </tr>
+        faturas.forEach((fatura, index) => {
+            let statusFinal = fatura.status;
+            let classeStatus = 'status-pendente';
+
+            // Validação de atraso automatizada
+            if (fatura.status === 'Pendente' && fatura.vencimento < hoje) {
+                statusFinal = 'Atrasado';
+                classeStatus = 'status-atrasado';
+            } else if (fatura.status === 'Pago') {
+                classeStatus = 'status-pago';
+            }
+
+            // Formatar data para padrão brasileiro
+            const dataFormatada = fatura.vencimento.split('-').reverse().join('/');
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><b>${fatura.veiculo}</b></td>
+                <td>${fatura.descricao}</td>
+                <td>R$ ${parseFloat(fatura.valor).toFixed(2)}</td>
+                <td>${dataFormatada}</td>
+                <td><span class="badge ${classeStatus}">${statusFinal}</span></td>
+                <td>
+                    ${fatura.status === 'Pendente' ? `<button onclick="marcarComoPago(\${index})" style="background:#2ecc71; padding:5px 10px; font-size:12px; margin-right:5px;">Pagar</button>` : ''}
+                    <button class="btn-delete" onclick="removerFatura(${index})">Excluir</button>
+                </td>
+            `;
+            tabela.appendChild(tr);
+        });
+    }
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const novaFatura = {
+            veiculo: document.getElementById('veiculo').value,
+            descricao: document.getElementById('descricao').value,
+            valor: document.getElementById('valor').value,
+            vencimento: document.getElementById('vencimento').value,
+            status: document.getElementById('status').value
+        };
+        faturas.push(novaFatura);
+        salvarDados();
+        form.reset();
+    });
+
+    function marcarComoPago(index) {
+        faturas[index].status = 'Pago';
+        salvarDados();
+    }
+
+    function removerFatura(index) {
+        if(confirm("Deseja realmente excluir este registro?")) {
+            faturas.splice(index, 1);
+            salvarDados();
+        }
+    }
+
+    // Inicializar
+    renderizarTabela();
+</script>
+
+</body>
+</html>
